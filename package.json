@@ -1,0 +1,9 @@
+{
+  "name": "tap2sendhope",
+  "private": true,
+  "scripts": {
+    "dev": "cd backend && npm run dev",
+    "start": "cd backend && npm start",
+    "install:backend": "cd backend && npm install"
+  }
+}

@@ -3,6 +3,7 @@ const multer = require('multer');
 const path = require('path');
 const File = require('../models/file');
 const { v4: uuidv4 } = require('uuid');
+const { baseUrl } = require('../config/env');
 
 const uploadsDir = path.join(__dirname, '../uploads');
 
@@ -28,7 +29,7 @@ router.post('/', (req, res) => {
       size: req.file.size
     });
     const response = await file.save();
-    res.json({ file: `${process.env.APP_BASE_URL}/files/${response.uuid}` });
+    res.json({ file: `${baseUrl}/files/${response.uuid}` });
   });
 });
 
@@ -54,10 +55,10 @@ router.post('/send', async (req, res) => {
       text: `${emailFrom} shared a file with you.`,
       html: require('../services/emailTemplate')({
         emailFrom,
-        downloadLink: `${process.env.APP_BASE_URL}/files/${file.uuid}?source=email`,
+        downloadLink: `${baseUrl}/files/${file.uuid}?source=email`,
         size: parseInt(file.size / 1000, 10) + ' KB',
         expires: '24 hours',
-        baseUrl: process.env.APP_BASE_URL || 'http://localhost:3000',
+        baseUrl,
       }),
     });
 

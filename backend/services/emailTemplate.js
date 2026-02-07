@@ -1,4 +1,4 @@
-module.exports = ({ emailFrom, downloadLink, size, expires, baseUrl = 'http://localhost:3000' }) => {
+module.exports = ({ emailFrom, downloadLink, size, expires, baseUrl }) => {
   return `
         <!doctype html>
             <html>
